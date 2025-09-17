@@ -10,7 +10,7 @@ export const useBooks = () => {
   });
 };
 
-export const useBook = (id: number) => {
+export const useBook = (id: string) => {
   return useQuery({
     queryKey: ['book', id],
     queryFn: () => booksAPI.getBook(id),
@@ -46,7 +46,7 @@ export const useUpdateBook = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ id, data }: { id: number; data: Partial<Omit<Book, 'id'>> }) =>
+    mutationFn: ({ id, data }: { id: string; data: Omit<Book, '_id'> }) =>
       booksAPI.updateBook(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['books'] });

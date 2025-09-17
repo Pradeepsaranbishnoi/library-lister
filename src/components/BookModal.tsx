@@ -15,10 +15,11 @@ const BookModal = ({ isOpen, onClose, book }: BookModalProps) => {
 
   const isLoading = createBook.isPending || updateBook.isPending;
 
-  const handleSubmit = async (data: any) => {
+  const handleSubmit = async (data: Omit<Book, '_id'>) => {
     try {
       if (book) {
-        await updateBook.mutateAsync({ id: book.id, data });
+        if (!book._id) throw new Error('Missing _id for update');
+        await updateBook.mutateAsync({ id: book._id, data });
       } else {
         await createBook.mutateAsync(data);
       }

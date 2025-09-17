@@ -29,7 +29,7 @@ const BookTable = ({ books, isLoading }: BookTableProps) => {
     setIsModalOpen(false);
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     try {
       await deleteBook.mutateAsync(id);
     } catch (error) {
@@ -89,7 +89,7 @@ const BookTable = ({ books, isLoading }: BookTableProps) => {
             <TableBody>
               {books.map((book, index) => (
                 <TableRow 
-                  key={book.id} 
+                  key={book._id || `${book.title}-${index}`} 
                   className="hover:bg-primary/5 border-border/30 transition-all duration-200 group"
                   style={{ animationDelay: `${index * 50}ms` }}
                 >
@@ -147,7 +147,7 @@ const BookTable = ({ books, isLoading }: BookTableProps) => {
                           <AlertDialogFooter>
                             <AlertDialogCancel className="hover:bg-secondary/50">Cancel</AlertDialogCancel>
                             <AlertDialogAction
-                              onClick={() => handleDelete(book.id)}
+                              onClick={() => book._id && handleDelete(book._id)}
                               className="bg-gradient-to-r from-destructive to-destructive/80 hover:from-destructive/90 hover:to-destructive/70 shadow-lg"
                               disabled={deleteBook.isPending}
                             >
