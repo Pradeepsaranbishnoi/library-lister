@@ -42,6 +42,10 @@ const BookPagination = ({
               e.preventDefault();
               onPageChange(i);
             }}
+            className={`rounded-lg transition-all duration-200 ${i === currentPage 
+              ? 'bg-gradient-primary text-primary-foreground neon-glow font-semibold' 
+              : 'hover:bg-primary/20 hover:text-primary hover:scale-105'
+            }`}
           >
             {i}
           </PaginationLink>
@@ -53,11 +57,12 @@ const BookPagination = ({
   };
 
   return (
-    <Card>
-      <CardContent className="p-4">
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="text-sm text-muted-foreground">
-            Showing {startItem} to {endItem} of {totalItems} books
+    <Card className="glass-effect border-border/50 shadow-card">
+      <CardContent className="p-6">
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-6">
+          <div className="text-sm text-muted-foreground flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+            <span>Showing {startItem} to {endItem} of {totalItems} books</span>
           </div>
           
           <Pagination>
@@ -69,7 +74,7 @@ const BookPagination = ({
                     e.preventDefault();
                     if (currentPage > 1) onPageChange(currentPage - 1);
                   }}
-                  className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
+                  className={`rounded-lg transition-all duration-200 ${currentPage === 1 ? 'pointer-events-none opacity-50' : 'hover:bg-primary/20 hover:text-primary hover:scale-105'}`}
                 />
               </PaginationItem>
               
@@ -82,7 +87,7 @@ const BookPagination = ({
                     e.preventDefault();
                     if (currentPage < totalPages) onPageChange(currentPage + 1);
                   }}
-                  className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}
+                  className={`rounded-lg transition-all duration-200 ${currentPage === totalPages ? 'pointer-events-none opacity-50' : 'hover:bg-primary/20 hover:text-primary hover:scale-105'}`}
                 />
               </PaginationItem>
             </PaginationContent>

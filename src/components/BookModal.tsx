@@ -31,11 +31,16 @@ const BookModal = ({ isOpen, onClose, book }: BookModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle>{book ? 'Edit Book' : 'Add New Book'}</DialogTitle>
-        </DialogHeader>
-        <BookForm book={book} onSubmit={handleSubmit} isLoading={isLoading} />
+      <DialogContent className="sm:max-w-2xl glass-effect border-border/50 shadow-card">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg"></div>
+        <div className="relative">
+          <DialogHeader className="pb-6">
+            <DialogTitle className="text-2xl font-bold gradient-text">
+              {book ? 'Edit Book' : 'Add New Book'}
+            </DialogTitle>
+          </DialogHeader>
+          <BookForm book={book} onSubmit={handleSubmit} isLoading={isLoading} />
+        </div>
       </DialogContent>
     </Dialog>
   );

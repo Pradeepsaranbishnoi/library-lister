@@ -75,20 +75,27 @@ const Index = () => {
   return (
     <Layout>
       <div className="space-y-6">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <div>
-            <h2 className="text-2xl font-bold text-foreground">Book Management</h2>
-            <p className="text-muted-foreground mt-1">
-              Manage your library collection
-            </p>
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-primary opacity-10 blur-3xl rounded-full"></div>
+          <div className="relative flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 mb-8">
+            <div className="space-y-2">
+              <h2 className="text-4xl font-bold gradient-text">Library Dashboard</h2>
+              <p className="text-lg text-muted-foreground">
+                Manage your digital book collection with style
+              </p>
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                <div className="w-2 h-2 rounded-full bg-success animate-pulse"></div>
+                <span>{books.length} books in your collection</span>
+              </div>
+            </div>
+            <Button 
+              onClick={() => setIsAddModalOpen(true)}
+              className="relative bg-gradient-primary hover:scale-105 text-primary-foreground px-8 py-3 rounded-xl neon-glow transition-all duration-300 font-semibold"
+            >
+              <Plus className="w-5 h-5 mr-2" />
+              Add New Book
+            </Button>
           </div>
-          <Button 
-            onClick={() => setIsAddModalOpen(true)}
-            className="bg-primary hover:bg-primary-hover text-primary-foreground"
-          >
-            <Plus className="w-4 h-4 mr-2" />
-            Add Book
-          </Button>
         </div>
 
         <BookFilters

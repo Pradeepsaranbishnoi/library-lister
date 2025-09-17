@@ -56,15 +56,19 @@ const BookForm = ({ book, onSubmit, isLoading = false }: BookFormProps) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-8">
         <FormField
           control={form.control}
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Title</FormLabel>
+              <FormLabel className="text-foreground font-semibold">Title</FormLabel>
               <FormControl>
-                <Input placeholder="Enter book title" {...field} />
+                <Input 
+                  placeholder="Enter book title" 
+                  {...field} 
+                  className="h-12 bg-secondary/50 border-border/50 rounded-xl focus:ring-2 focus:ring-primary/50 transition-all"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -76,9 +80,13 @@ const BookForm = ({ book, onSubmit, isLoading = false }: BookFormProps) => {
           name="author"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Author</FormLabel>
+              <FormLabel className="text-foreground font-semibold">Author</FormLabel>
               <FormControl>
-                <Input placeholder="Enter author name" {...field} />
+                <Input 
+                  placeholder="Enter author name" 
+                  {...field} 
+                  className="h-12 bg-secondary/50 border-border/50 rounded-xl focus:ring-2 focus:ring-primary/50 transition-all"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -90,14 +98,14 @@ const BookForm = ({ book, onSubmit, isLoading = false }: BookFormProps) => {
           name="genre"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Genre</FormLabel>
+              <FormLabel className="text-foreground font-semibold">Genre</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger>
+                  <SelectTrigger className="h-12 bg-secondary/50 border-border/50 rounded-xl hover:bg-secondary/70 transition-colors">
                     <SelectValue placeholder="Select a genre" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className="glass-effect">
                   {GENRES.map((genre) => (
                     <SelectItem key={genre} value={genre}>
                       {genre}
@@ -115,7 +123,7 @@ const BookForm = ({ book, onSubmit, isLoading = false }: BookFormProps) => {
           name="publishedYear"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Published Year</FormLabel>
+              <FormLabel className="text-foreground font-semibold">Published Year</FormLabel>
               <FormControl>
                 <Input
                   type="number"
@@ -124,6 +132,7 @@ const BookForm = ({ book, onSubmit, isLoading = false }: BookFormProps) => {
                   placeholder="Enter published year"
                   {...field}
                   onChange={(e) => field.onChange(parseInt(e.target.value) || 0)}
+                  className="h-12 bg-secondary/50 border-border/50 rounded-xl focus:ring-2 focus:ring-primary/50 transition-all"
                 />
               </FormControl>
               <FormMessage />
@@ -136,14 +145,14 @@ const BookForm = ({ book, onSubmit, isLoading = false }: BookFormProps) => {
           name="status"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Status</FormLabel>
+              <FormLabel className="text-foreground font-semibold">Status</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
-                  <SelectTrigger>
+                  <SelectTrigger className="h-12 bg-secondary/50 border-border/50 rounded-xl hover:bg-secondary/70 transition-colors">
                     <SelectValue />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent>
+                <SelectContent className="glass-effect">
                   <SelectItem value="Available">Available</SelectItem>
                   <SelectItem value="Issued">Issued</SelectItem>
                 </SelectContent>
@@ -153,8 +162,12 @@ const BookForm = ({ book, onSubmit, isLoading = false }: BookFormProps) => {
           )}
         />
 
-        <div className="flex justify-end space-x-3">
-          <Button type="submit" disabled={isLoading} className="bg-primary hover:bg-primary-hover">
+        <div className="flex justify-end space-x-3 pt-4">
+          <Button 
+            type="submit" 
+            disabled={isLoading} 
+            className="bg-gradient-primary hover:scale-105 text-primary-foreground px-8 py-3 rounded-xl neon-glow transition-all duration-300 font-semibold"
+          >
             {isLoading ? 'Saving...' : book ? 'Update Book' : 'Add Book'}
           </Button>
         </div>

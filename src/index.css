@@ -8,40 +8,46 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 248 250 252;
-    --foreground: 15 23 42;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 255 255 255;
-    --card-foreground: 15 23 42;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 255 255 255;
-    --popover-foreground: 15 23 42;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 239 68% 68%;
-    --primary-foreground: 255 255 255;
-    --primary-hover: 239 84% 67%;
+    --primary: 263 70% 50%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 263 85% 60%;
 
-    --secondary: 241 245 249;
-    --secondary-foreground: 51 65 85;
+    --secondary: 240 5.9% 10%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 248 250 252;
-    --muted-foreground: 100 116 139;
+    --muted: 240 5.9% 10%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 239 68% 68%;
-    --accent-foreground: 255 255 255;
+    --accent: 263 70% 50%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 255 255 255;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 226 232 240;
-    --input: 226 232 240;
-    --ring: 239 68% 68%;
+    --border: 240 5.9% 20%;
+    --input: 240 5.9% 20%;
+    --ring: 263 70% 50%;
 
     --success: 142 76% 36%;
-    --success-foreground: 255 255 255;
+    --success-foreground: 0 0% 98%;
 
     --warning: 38 92% 50%;
-    --warning-foreground: 255 255 255;
+    --warning-foreground: 0 0% 98%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(263 70% 50%) 0%, hsl(300 70% 60%) 50%, hsl(220 70% 60%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(240 5.9% 10%) 0%, hsl(240 5.9% 15%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(263 70% 50%) 0%, hsl(300 70% 60%) 100%);
+    --shadow-glow: 0 0 50px hsl(263 70% 50% / 0.3);
+    --shadow-card: 0 10px 30px hsl(240 10% 3.9% / 0.5);
 
     --radius: 0.5rem;
 
@@ -63,40 +69,40 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 15 23 42;
-    --foreground: 248 250 252;
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
 
-    --card: 30 41 59;
-    --card-foreground: 248 250 252;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 30 41 59;
-    --popover-foreground: 248 250 252;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 239 68% 68%;
-    --primary-foreground: 255 255 255;
-    --primary-hover: 239 84% 67%;
+    --primary: 263 70% 50%;
+    --primary-foreground: 0 0% 98%;
+    --primary-hover: 263 85% 60%;
 
-    --secondary: 51 65 85;
-    --secondary-foreground: 248 250 252;
+    --secondary: 240 5.9% 10%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 51 65 85;
-    --muted-foreground: 148 163 184;
+    --muted: 240 5.9% 10%;
+    --muted-foreground: 240 5% 64.9%;
 
-    --accent: 239 68% 68%;
-    --accent-foreground: 255 255 255;
+    --accent: 263 70% 50%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 255 255 255;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 51 65 85;
-    --input: 51 65 85;
-    --ring: 239 68% 68%;
+    --border: 240 5.9% 20%;
+    --input: 240 5.9% 20%;
+    --ring: 263 70% 50%;
 
     --success: 142 76% 36%;
-    --success-foreground: 255 255 255;
+    --success-foreground: 0 0% 98%;
 
     --warning: 38 92% 50%;
-    --warning-foreground: 255 255 255;
+    --warning-foreground: 0 0% 98%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -115,5 +121,33 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    background: linear-gradient(135deg, hsl(240 10% 3.9%) 0%, hsl(240 5.9% 10%) 50%, hsl(240 10% 3.9%) 100%);
+    min-height: 100vh;
+  }
+
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .neon-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card), var(--shadow-glow);
   }
 }

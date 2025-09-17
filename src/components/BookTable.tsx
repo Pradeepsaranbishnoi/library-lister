@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
-import { Edit, Trash2 } from 'lucide-react';
+import { Edit, Trash2, BookOpen } from 'lucide-react';
 import { Book } from '@/lib/api';
 import { useDeleteBook } from '@/hooks/useBooks';
 import BookModal from './BookModal';
@@ -39,12 +39,14 @@ const BookTable = ({ books, isLoading }: BookTableProps) => {
 
   if (isLoading) {
     return (
-      <Card>
+      <Card className="glass-effect border-border/50 shadow-card">
         <CardContent className="p-6">
           <div className="space-y-4">
             {[...Array(5)].map((_, i) => (
-              <div key={i} className="animate-pulse">
-                <div className="h-12 bg-muted rounded"></div>
+              <div key={i} className="animate-pulse flex items-center space-x-4" style={{ animationDelay: `${i * 100}ms` }}>
+                <div className="h-12 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg flex-1"></div>
+                <div className="h-12 w-24 bg-gradient-to-r from-secondary/50 to-muted/50 rounded-lg"></div>
+                <div className="h-12 w-16 bg-gradient-to-r from-success/30 to-warning/30 rounded-lg"></div>
               </div>
             ))}
           </div>
@@ -55,9 +57,15 @@ const BookTable = ({ books, isLoading }: BookTableProps) => {
 
   if (!books.length) {
     return (
-      <Card>
-        <CardContent className="p-12 text-center">
-          <p className="text-muted-foreground">No books found. Add your first book to get started!</p>
+      <Card className="glass-effect border-border/50 shadow-card">
+        <CardContent className="p-16 text-center">
+          <div className="space-y-4">
+            <div className="w-16 h-16 mx-auto bg-gradient-primary rounded-full flex items-center justify-center opacity-50">
+              <BookOpen className="w-8 h-8 text-primary-foreground" />
+            </div>
+            <h3 className="text-xl font-semibold gradient-text">No Books Found</h3>
+            <p className="text-muted-foreground">Add your first book to get started on your digital library journey!</p>
+          </div>
         </CardContent>
       </Card>
     );
@@ -65,46 +73,57 @@ const BookTable = ({ books, isLoading }: BookTableProps) => {
 
   return (
     <>
-      <Card>
+      <Card className="glass-effect card-hover border-border/50 shadow-card overflow-hidden">
         <CardContent className="p-0">
           <Table>
             <TableHeader>
-              <TableRow className="hover:bg-transparent">
-                <TableHead className="font-semibold">Title</TableHead>
-                <TableHead className="font-semibold">Author</TableHead>
-                <TableHead className="font-semibold">Genre</TableHead>
-                <TableHead className="font-semibold">Year</TableHead>
-                <TableHead className="font-semibold">Status</TableHead>
-                <TableHead className="font-semibold">Actions</TableHead>
+              <TableRow className="hover:bg-transparent border-border/50 bg-gradient-to-r from-secondary/20 to-transparent">
+                <TableHead className="font-bold text-foreground py-4 px-6">Title</TableHead>
+                <TableHead className="font-bold text-foreground py-4">Author</TableHead>
+                <TableHead className="font-bold text-foreground py-4">Genre</TableHead>
+                <TableHead className="font-bold text-foreground py-4">Year</TableHead>
+                <TableHead className="font-bold text-foreground py-4">Status</TableHead>
+                <TableHead className="font-bold text-foreground py-4">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {books.map((book) => (
-                <TableRow key={book.id} className="hover:bg-muted/50">
-                  <TableCell className="font-medium">{book.title}</TableCell>
-                  <TableCell>{book.author}</TableCell>
-                  <TableCell>
-                    <Badge variant="secondary">{book.genre}</Badge>
+              {books.map((book, index) => (
+                <TableRow 
+                  key={book.id} 
+                  className="hover:bg-primary/5 border-border/30 transition-all duration-200 group"
+                  style={{ animationDelay: `${index * 50}ms` }}
+                >
+                  <TableCell className="font-semibold py-4 px-6 text-foreground group-hover:text-primary transition-colors">
+                    {book.title}
                   </TableCell>
-                  <TableCell>{book.publishedYear}</TableCell>
-                  <TableCell>
+                  <TableCell className="py-4 text-muted-foreground">{book.author}</TableCell>
+                  <TableCell className="py-4">
+                    <Badge 
+                      variant="secondary" 
+                      className="bg-gradient-to-r from-primary/20 to-accent/20 border-primary/30 text-foreground font-medium"
+                    >
+                      {book.genre}
+                    </Badge>
+                  </TableCell>
+                  <TableCell className="py-4 text-muted-foreground font-medium">{book.publishedYear}</TableCell>
+                  <TableCell className="py-4">
                     <Badge 
                       variant={book.status === 'Available' ? 'default' : 'outline'}
                       className={book.status === 'Available' 
-                        ? 'bg-success text-success-foreground' 
-                        : 'border-warning text-warning'
+                        ? 'bg-gradient-to-r from-success to-success/80 text-success-foreground font-semibold shadow-lg' 
+                        : 'border-warning text-warning bg-warning/10 font-semibold'
                       }
                     >
                       {book.status}
                     </Badge>
                   </TableCell>
-                  <TableCell>
+                  <TableCell className="py-4">
                     <div className="flex space-x-2">
                       <Button
                         variant="ghost"
                         size="sm"
                         onClick={() => handleEdit(book)}
-                        className="hover:bg-primary/10 hover:text-primary"
+                        className="hover:bg-primary/20 hover:text-primary rounded-lg transition-all duration-200 hover:scale-105"
                       >
                         <Edit className="w-4 h-4" />
                       </Button>
@@ -113,23 +132,23 @@ const BookTable = ({ books, isLoading }: BookTableProps) => {
                           <Button
                             variant="ghost"
                             size="sm"
-                            className="hover:bg-destructive/10 hover:text-destructive"
+                            className="hover:bg-destructive/20 hover:text-destructive rounded-lg transition-all duration-200 hover:scale-105"
                           >
                             <Trash2 className="w-4 h-4" />
                           </Button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent>
+                        <AlertDialogContent className="glass-effect">
                           <AlertDialogHeader>
-                            <AlertDialogTitle>Delete Book</AlertDialogTitle>
-                            <AlertDialogDescription>
+                            <AlertDialogTitle className="gradient-text">Delete Book</AlertDialogTitle>
+                            <AlertDialogDescription className="text-muted-foreground">
                               Are you sure you want to delete "{book.title}"? This action cannot be undone.
                             </AlertDialogDescription>
                           </AlertDialogHeader>
                           <AlertDialogFooter>
-                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogCancel className="hover:bg-secondary/50">Cancel</AlertDialogCancel>
                             <AlertDialogAction
                               onClick={() => handleDelete(book.id)}
-                              className="bg-destructive hover:bg-destructive/90"
+                              className="bg-gradient-to-r from-destructive to-destructive/80 hover:from-destructive/90 hover:to-destructive/70 shadow-lg"
                               disabled={deleteBook.isPending}
                             >
                               {deleteBook.isPending ? 'Deleting...' : 'Delete'}
