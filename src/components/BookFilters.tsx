@@ -58,7 +58,7 @@ const BookFilters = ({
               </SelectTrigger>
               <SelectContent>
                 {GENRES.map((genre) => (
-                  <SelectItem key={genre} value={genre === 'All Genres' ? '' : genre}>
+                  <SelectItem key={genre} value={genre === 'All Genres' ? 'all-genres' : genre}>
                     {genre}
                   </SelectItem>
                 ))}
@@ -70,7 +70,7 @@ const BookFilters = ({
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Status</SelectItem>
+                <SelectItem value="all-status">All Status</SelectItem>
                 <SelectItem value="Available">Available</SelectItem>
                 <SelectItem value="Issued">Issued</SelectItem>
               </SelectContent>

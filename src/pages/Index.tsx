@@ -12,8 +12,8 @@ const ITEMS_PER_PAGE = 10;
 
 const Index = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [genreFilter, setGenreFilter] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
+  const [genreFilter, setGenreFilter] = useState('all-genres');
+  const [statusFilter, setStatusFilter] = useState('all-status');
   const [currentPage, setCurrentPage] = useState(1);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
@@ -25,8 +25,8 @@ const Index = () => {
         book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
         book.author.toLowerCase().includes(searchTerm.toLowerCase());
       
-      const matchesGenre = !genreFilter || book.genre === genreFilter;
-      const matchesStatus = !statusFilter || book.status === statusFilter;
+      const matchesGenre = genreFilter === 'all-genres' || !genreFilter || book.genre === genreFilter;
+      const matchesStatus = statusFilter === 'all-status' || !statusFilter || book.status === statusFilter;
       
       return matchesSearch && matchesGenre && matchesStatus;
     });
